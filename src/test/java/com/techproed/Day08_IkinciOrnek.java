@@ -25,10 +25,19 @@ public class Day08_IkinciOrnek {
     public static void tearDown(){
          driver.quit();
     }
-    @Before // her test methodundan önce çalışacak
-    public void testtenOnce(){
-        driver.get("http://google.com");
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     @After // her test methodundan sonra çalışacak
     public void testtenSonra(){
         WebElement sonucSayisi = driver.findElement(By.id("result-stats"));
