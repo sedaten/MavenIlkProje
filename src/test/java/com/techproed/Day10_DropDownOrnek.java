@@ -15,36 +15,31 @@ import java.util.concurrent.TimeUnit;
 
 public class Day10_DropDownOrnek {
 
-    static WebDriver driver; // instance variable
     // 1. Amazon.com'a gidelim.
-// 2. DropDown üzerinde Software seçelim.
-// 3. Arama kutusuna JAVA yazalım ve arama yapalım.
-// 4. Sonuç sayısını ekrana yazdıralım.
-
+    // 2. DropDown üzerinde Software seçelim.
+    // 3. Arama kutusuna JAVA yazalım ve arama yapalım.
+    // 4. Sonuç sayısını ekrana yazdıralım.
+    static WebDriver driver; // instance variable
     @BeforeClass
-    public static void setUp() {
+    public static void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
-
     @Test
-    public void test1() {
+    public void amazonAramaTesti(){
         driver.get("http://amazon.com");
         WebElement dropDown = driver.findElement(By.id("searchDropdownBox"));
         Select select = new Select(dropDown);
         select.selectByVisibleText("Software");
-
-        WebElement s = driver.findElement(By.id("twotabsearchtextbox"));
-        s.sendKeys("Java"+ Keys.ENTER);
-        //<div class="a-section a-spacing-small a-spacing-top-small">
-        //
+        WebElement aramaKutusu = driver.findElement(By.id("twotabsearchtextbox"));
+        aramaKutusu.sendKeys("JAVA" + Keys.ENTER);
         WebElement sonucSayisi = driver.findElement(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']"));
         System.out.println(sonucSayisi.getText());
         Assert.assertTrue(sonucSayisi.getText().contains("JAVA"));
+        // CLASS DEĞERİ  :  a-section a-spacing-small a-spacing-top-small
+        //WebElement sonucSayisiCss = driver.findElement(By.cssSelector(".a-section.a-spacing-small.a-spacing-top-small"));
+        //System.out.println(sonucSayisiCss.getText());
     }
 }
-
-
-
